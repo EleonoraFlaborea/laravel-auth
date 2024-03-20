@@ -12,29 +12,41 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Title</th>
+      <th scope="col">Slug</th>
+      <th scope="col">Created</th>
+      <th scope="col">Last update</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
+  @forelse($projects as $project)
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">{{$project->id}}</th>
+      <td>{{$project->title}}</td>
+      <td>{{$project->slug}}</td>
+      <td>{{$project->created_at}}</td>
+      <td>{{$project->updated_at}}</td>
+      <td>
+        <div class="d-flex justify-content-end">
+            <a href="{{route('admin.projects.show', $project)}}" class="btn btn-sm btn-primary">
+              <i class="fas fa-eye"></i>
+            </a>
+
+        </div>
+      </td>
+
+
+
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+   @empty
+     <tr>
+        <td colspan="6">
+         <h3 class="text-center">Non ci sono prgetti</h3>
+        </td>
+     </tr>
+   @endforelse
+   
   </tbody>
 </table>
 
