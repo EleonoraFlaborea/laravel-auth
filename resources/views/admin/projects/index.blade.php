@@ -6,6 +6,7 @@
 
  <header>
     <h1>Projects</h1>
+
  </header>
 
  <table class="table table-dark table-striped">
@@ -16,7 +17,14 @@
       <th scope="col">Slug</th>
       <th scope="col">Created</th>
       <th scope="col">Last update</th>
-      <th></th>
+      <th>
+        <div class="d-flex justify-content-end">
+            <a href="{{route('admin.projects.create')}}" class="btn btn-sm btn-success">
+               <i class="fas fa-plus me-2"></i>
+               Nuovo
+            </a>
+        </div>
+      </th>
     </tr>
    </thead>
    <tbody>
