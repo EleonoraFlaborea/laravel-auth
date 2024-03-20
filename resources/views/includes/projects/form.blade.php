@@ -11,24 +11,53 @@
             <div class="col-12">
                 <div class="mb-3">
                    <label for="title" class="form-label">Titolo</label>
-                   <input type="text" class="form-control" id="title" placeholder="Titolo..." value="{{old('title', $project->title)}}" required>
-                </div>
+                   <input type="text" class="form-control" @error('title') is-invalid @elseif(old('title', '')) is-valid @enderror id="title" placeholder="Titolo..." value="{{old('title', $project->title)}}" required>
+                </div> 
+                   @error('title')
+                   <div class="invalid-feedback">
+                   {{ $message}}
+                   </div>
+                   @else
+                   <div class="form-text">
+                   Inserisci il titolo del progetto
+                   </div>
+                   @enderror
+                
             </div>
 
             <div class="col-12">
                 <div class="mb-3">
                    <label for="content" class="form-label">Contenuto del progetto</label>
-                   <textarea class="form-control" id="content" rows="10" required>
+                   <textarea class="form-control" @error('content') is-invalid @elseif(old('content', '')) is-valid @enderror id="content" rows="10" required>
                      {{old('content', $project->content)}}
                    </textarea>
+                   @error('content')
+                   <div class="invalid-feedback">
+                   {{ $message}}
+                   </div>
+                   @else
+                   <div class="form-text">
+                   Inserisci il contenuto del progetto
+                   </div>
+                   @enderror
                 </div>
             </div>
 
            <div class="col-11">
                 <div class="mb-3">
                   <label for="image" class="form-label">Image</label>
-                  <input type="url" class="form-control" name="image"id="image" value="{{old('image', $project->image)}}" placeholder="http:// o https://">
+                  <input type="url" class="form-control"  @error('image') is-invalid @elseif(old('image', '')) is-valid @enderror name="image" id="image" value="{{old('image', $project->image)}}" placeholder="http:// o https://">
                 </div>
+                   @error('image')
+                   <div class="invalid-feedback">
+                   {{ $message}}
+                   </div>
+                   @else
+                   <div class="form-text">
+                   Inserisci l'immagine del progetto
+                   </div>
+                   @enderror
+            
            </div>
 
 
