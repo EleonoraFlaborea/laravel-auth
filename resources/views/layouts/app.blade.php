@@ -9,7 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', "Eleonora's Portfolio" ) }} | @yield('title') </title>
-
+    <style>
+     body{
+        visibility: hidden
+     }
+    </style>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -39,7 +43,6 @@
 
     
     @yield('scripts')
-
 </body>
 
 </html>

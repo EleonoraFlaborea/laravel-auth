@@ -4,12 +4,12 @@
 
 @section('content')
 
-<header>
+ <header>
     <h1>Projects</h1>
-</header>
+ </header>
 
-<table class="table table-dark table-striped">
-  <thead>
+ <table class="table table-dark table-striped">
+   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
@@ -18,9 +18,9 @@
       <th scope="col">Last update</th>
       <th></th>
     </tr>
-  </thead>
-  <tbody>
-  @forelse($projects as $project)
+   </thead>
+   <tbody>
+   @forelse($projects as $project)
     <tr>
       <th scope="row">{{$project->id}}</th>
       <td>{{$project->title}}</td>
@@ -37,7 +37,7 @@
                <i class="fas fa-pencil"></i> 
             </a>
 
-            <form action="{{ route('admin.projects.destroy', $project->id)}}" method="POST">
+            <form action="{{ route('admin.projects.destroy', $project->id)}}" method="POST" class="delete-form">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-sm btn-danger">
@@ -60,6 +60,11 @@
    @endforelse
    
   </tbody>
-</table>
+ </table>
 
 @endsection
+
+@section('scripts')
+  @vite('resources/js/delete_confirmation.js')
+@endsection
+

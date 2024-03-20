@@ -35,7 +35,7 @@
       Modifica
     </a>
 
-    <form action="{{ route('admin.projects.destroy', $project->id)}}" method="POST">
+    <form action="{{ route('admin.projects.destroy', $project->id)}}" method="POST" class="delete-form">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">
@@ -48,4 +48,8 @@
 
 
 
+@endsection
+
+@section('scripts')
+  @vite('resources/js/delete_confirmation.js')
 @endsection
