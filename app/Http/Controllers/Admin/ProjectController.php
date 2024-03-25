@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Support\Str;
 //use App\Http\Controllers\Admin\Rule;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,13 +40,14 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|min:5|max:50|unique:projects',
             'content' => 'required|string',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg',
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'title.min' => 'Il titolo deve essere :min caratteri',
             'title.max' => 'Il titolo deve essere :max caratteri',
             'title.unique' => 'Non possono esistere due progetti con lo stesso titolo',
-            'image.url' => 'L\'indirizzo inserito non è valido',
+            'image.image' => 'Il file inserito non è un\'immagine',
+            'image.mimes' => 'Le estensioni valide sono: .png, .jpg, .jpeg',
             'content.required' => 'Il contenuto è obbligatorio',
         ]);
 
@@ -54,6 +56,11 @@ class ProjectController extends Controller
         $project = new Project();
         $project->fill($data);
         $project->slug = Str::slug($data['title']);
+
+        if(Arr::exists($data, 'image')){
+            $image_url = Storage::putFile('project_images', $data['image']);
+        }
+
         $project->save();
 
         return to_route('admin.projects.show', $project)->with('message', 'Project creato con successo')->with('type', 'success');
@@ -85,13 +92,14 @@ class ProjectController extends Controller
         $request->validate([
             'title' => ['required','string','min:5','max:50', Rule::unique('projects')->ignore($project->id)],
             'content' => 'required|string',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image',
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'title.min' => 'Il titolo deve essere :min caratteri',
             'title.max' => 'Il titolo deve essere :max caratteri',
             'title.unique' => 'Non possono esistere due progetti con lo stesso titolo',
-            'image.url' => 'L\'indirizzo inserito non è valido',
+            'image.image' => 'Il file inserito non è un\'immagine',
+            'image.mimes' => 'Le estensioni valide sono: .png, .jpg, .jpeg',
             'content.required' => 'Il contenuto è obbligatorio',
         ]);
 

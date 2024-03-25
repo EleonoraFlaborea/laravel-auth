@@ -1,9 +1,9 @@
 
     @if($project->exists)
-      <form action="{{ route('admin.projects.update', $project)}}" method="POST" novalidate>
+      <form action="{{ route('admin.projects.update', $project)}}" method="POST" enctype="multipart/form-data" novalidate>
         @method('PUT')
     @else
-      <form action="{{ route('admin.projects.store', $project)}}" method="POST" novalidate>
+      <form action="{{ route('admin.projects.store', $project)}}" method="POST" enctype="multipart/form-data" novalidate>
     @endif
     
         @csrf
@@ -12,7 +12,6 @@
                 <div class="mb-3">
                    <label for="title" class="form-label">Titolo</label>
                    <input type="text" class="form-control" @error('title') is-invalid @elseif(old('title', '')) is-valid @enderror id="title" placeholder="Titolo..." value="{{old('title', $project->title)}}" required>
-                </div> 
                    @error('title')
                    <div class="invalid-feedback">
                    {{ $message}}
@@ -22,6 +21,7 @@
                    Inserisci il titolo del progetto
                    </div>
                    @enderror
+                </div> 
                 
             </div>
 
@@ -43,25 +43,25 @@
                 </div>
             </div>
 
-           <div class="col-11">
+            <div class="col-11">
                 <div class="mb-3">
                   <label for="image" class="form-label">Image</label>
-                  <input type="url" class="form-control"  @error('image') is-invalid @elseif(old('image', '')) is-valid @enderror name="image" id="image" value="{{old('image', $project->image)}}" placeholder="http:// o https://">
-                </div>
+                  <input type="file" class="form-control"  @error('image') is-invalid @elseif(old('image', '')) is-valid @enderror 
+                  name="image" id="image" value="{{old('image', $project->image)}}" placeholder="http:// o https://">
                    @error('image')
                    <div class="invalid-feedback">
                    {{ $message}}
                    </div>
                    @else
                    <div class="form-text">
-                   Inserisci l'immagine del progetto
+                   Carica file immagine
                    </div>
                    @enderror
-            
-           </div>
+                </div>
+            </div>
 
 
-           <div class="col-11">
+           <div class="col-1">
                 <div class="mb-3">
                   <img src="{{old('image',$post->image ?? 'https://marcolanci.it/boolean/assets/placeholder.png')}}" class="img-fluid" alt="immagine project" id="preview">
                 </div>
