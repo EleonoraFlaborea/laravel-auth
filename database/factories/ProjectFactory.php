@@ -24,7 +24,7 @@ class ProjectFactory extends Factory
 
         Storage::makeDirectory('projects_images');
 
-        $image_url = Storage::putFile('projects_images', fake()->image(storage_path('app/public/projects_images'), 250, 250), "$slug.png" );
+        $image_url = Storage::putFileAs('projects_images', fake()->image(storage_path('app/public/projects_images'), 250, 250), "$slug.png" );
         
         return [
             'title' => $title,

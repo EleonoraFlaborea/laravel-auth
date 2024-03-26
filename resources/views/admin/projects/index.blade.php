@@ -62,7 +62,7 @@
    @empty
      <tr>
         <td colspan="6">
-         <h3 class="text-center">Non ci sono prgetti</h3>
+         <h3 class="text-center">Non ci sono progetti</h3>
         </td>
      </tr>
    @endforelse
