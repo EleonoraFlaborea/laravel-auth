@@ -11,7 +11,7 @@
 
 <div class="clearfix py-5">
 @if($project->image)
-    <img src="{{ asset('storage/' .$project->image)}}" alt="{{$project->title}}" class="me-2 float-start">
+    <img src="{{ $project->printImage()}}" alt="{{$project->title}}" class="me-2 float-start">
 @endif
 
 <p>{{$project->content}}</p>

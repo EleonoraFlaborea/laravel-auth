@@ -1,14 +1,14 @@
 @extends('layouts.app')
+@section('title', 'Post')
+
 @section('content')
 
-
-@forelse($projects as $project)
 <div class="card my-5">
     
     <div class="card-header d-flex align-items-center justify-content-between">
             {{$project->title}}
 
-        <a href="{{ route('guest.projects.show', $project->slug)}}" class="btn btn-sm btn-primary">Vedi</a>
+        <a href="{{ route('admin.projects.show', $project->slug)}}" class="btn btn-sm btn-primary">Vedi</a>
     </div>
     <div class="card-body">
         <div class="row">
@@ -25,12 +25,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
-@empty
-   <h3 class="text-center">Non ci sono post </h3>
- 
 
- @endforelse
 @endsection
