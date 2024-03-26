@@ -58,7 +58,10 @@ class ProjectController extends Controller
         $project->slug = Str::slug($data['title']);
 
         if(Arr::exists($data, 'image')){
-            $image_url = Storage::putFile('project_images', $data['image']);
+            $extension = $data['image']->extension();
+
+            $image_url = Storage::putFile('project_images', $data['image'], "$project->slug.$extension");
+            $project->image = $image_url;
         }
 
         $project->save();
@@ -107,6 +110,15 @@ class ProjectController extends Controller
         $data = $request->all();
         $project->fill($data);
         $project->slug = Str::slug($data['title']);
+
+        if(Arr::exists($data, 'image')){
+            if($project->image) Storage::delete($project->image);
+            $extension = $data['image']->extension();
+
+            $image_url = Storage::putFile('project_images', $data['image'], "{$data['slug']} .$extension");
+            $project->image = $image_url;
+        }
+
         $project->save();
         
         return to_route('admin.projects.show', $project)->with('message', 'Project modificato con successo')->with('type', 'success');
